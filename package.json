@@ -1,0 +1,28 @@
+{
+  "name": "ignis-api",
+  "version": "1.0.0",
+  "description": "Ignis chat service API",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ignis-app/ignis-api.git"
+  },
+  "author": "ayazukuri",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ignis-app/ignis-api/issues"
+  },
+  "homepage": "https://github.com/ignis-app/ignis-api#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  }
+}
