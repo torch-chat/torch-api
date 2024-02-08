@@ -1,21 +1,21 @@
 {
-  "name": "ignis-api",
+  "name": "torch-api",
   "version": "1.0.0",
-  "description": "Ignis chat service API",
-  "main": "main.js",
+  "description": "Torch chat service API",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ignis-app/ignis-api.git"
+    "url": "git+https://github.com/torch-chat/torch-api.git"
   },
   "author": "ayazukuri",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/ignis-app/ignis-api/issues"
+    "url": "https://github.com/torch-chat/torch-api/issues"
   },
-  "homepage": "https://github.com/ignis-app/ignis-api#readme",
+  "homepage": "torch.lumyn.org",
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/js-yaml": "^4.0.9",

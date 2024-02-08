@@ -8,5 +8,5 @@
         "outDir": "build",
         "target": "ES2020"
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "src/index.d.ts"]
 }
