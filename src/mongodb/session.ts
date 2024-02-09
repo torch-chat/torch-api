@@ -1,6 +1,7 @@
 import { Long, ObjectId } from "mongodb";
 import { Context, Session } from "../interface";
 import { sessionKey, snowflake } from "../util";
+import { AcknowledgeException } from "../exceptions/AcknowledgeException";
 
 export async function createSession(ctx: Context, userId: string): Promise<Session> {
     const id = snowflake();
@@ -10,7 +11,7 @@ export async function createSession(ctx: Context, userId: string): Promise<Sessi
         "userId": userId,
         "key": key
     });
-    if (!result.acknowledged) throw { type: "mongo_acknowledge", message: "session creation not acknowledged" };
+    if (!result.acknowledged) throw new AcknowledgeException("session creation not acknowledged");
     return {
         id,
         userId,
@@ -20,5 +21,5 @@ export async function createSession(ctx: Context, userId: string): Promise<Sessi
 
 export async function invalidateSession(ctx: Context, key: string): Promise<void> {
     const result = await ctx.db.collection("sessions").deleteOne({ "key": key });
-    if (!result.acknowledged) throw { type: "mongo_acknowledge", message: "session invalidation not acknowledged" };
+    if (!result.acknowledged) throw new AcknowledgeException("session invalidation not acknowledged");
 }
