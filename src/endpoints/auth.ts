@@ -1,5 +1,10 @@
-import { RequestHandler } from "express";
+import { Endpoint } from "../interface";
 
-export const auth: RequestHandler = (req, res) => {
-    
+export const auth: Endpoint = {
+    schema: {
+        
+    },
+    handler: (req, res) => {
+        
+    }
 };
