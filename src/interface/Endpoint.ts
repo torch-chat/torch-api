@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { Class } from "./Class";
+import { Globals } from "./Globals";
 
 export interface ValidationError {
     prop: string;
@@ -7,18 +8,27 @@ export interface ValidationError {
 }
 
 export type Validator<T> = (value: T) => ValidationError | undefined;
-export type SchemaEntry<T> = {
+export type TypedSchemaEntry<T> = {
     type: string | Class<T>;
     required?: boolean;
     notNull?: boolean;
     validate?: Validator<T> | Validator<T>[];
 }
-export type Schema = {
+export type UntypedSchemaEntry = Pick<TypedSchemaEntry<string>, "required" | "notNull" | "validate">;
+export type TypedSchema = {
     // eslint-disable-next-line
-    [prop: string]: SchemaEntry<any>;
+    [prop: string]: TypedSchemaEntry<any>;
+}
+export type UntypedSchema = {
+    [prop: string]: UntypedSchemaEntry;
 }
 
+export type Method = "all" | "get" | "post" | "put" | "delete" | "patch" | "options" | "head";
 export interface Endpoint {
-    schema?: Schema;
-    handler: RequestHandler;
+    path: string;
+    method: Method;
+    query?: TypedSchema;
+    body?: TypedSchema;
+    params?: UntypedSchema;
+    handler: (ctx: Globals) => RequestHandler;
 }

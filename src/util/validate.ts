@@ -1,8 +1,8 @@
-import { ValidationError, Schema } from "../interface";
+import { ValidationError, TypedSchema, UntypedSchema, TypedSchemaEntry } from "../interface";
 import { ofType } from "./ofType";
 
 // eslint-disable-next-line
-export function validate(schema: Schema, body: { [index: string]: any }) {
+export function validate(schema: TypedSchema | UntypedSchema, body: { [index: string]: any }) {
     const errors: ValidationError[] = [];
     for (const [prop, rule] of Object.entries(schema)) {
         if ((rule.required ?? false) && !Object.prototype.hasOwnProperty.call(body, prop)) {
@@ -13,7 +13,8 @@ export function validate(schema: Schema, body: { [index: string]: any }) {
             errors.push({ prop, err: "property is not nullable" });
             continue;
         }
-        if (!ofType(body[prop], rule.type)) {
+        // eslint-disable-next-line
+        if (Object.prototype.hasOwnProperty.call(rule, "type") && !ofType(body[prop], (rule as TypedSchemaEntry<any>).type)) {
             errors.push({ prop, err: "property type mismatch" });
             continue;
         }
