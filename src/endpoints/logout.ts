@@ -1,7 +1,7 @@
 import { Endpoint } from "../interface";
 import { invalidateSession } from "../mongodb";
 
-export default {
+export const get = {
     path: "/logout",
     method: "get",
     handler: (gl) => async (req, res) => {

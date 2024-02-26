@@ -2,12 +2,7 @@ import { RequestHandler } from "express";
 import { Class } from "./Class";
 import { Globals } from "./Globals";
 
-export interface ValidationError {
-    prop: string;
-    err: string;
-}
-
-export type Validator<T> = (value: T) => ValidationError | undefined;
+export type Validator<T> = (value: T) => void;
 export type TypedSchemaEntry<T> = {
     type: string | Class<T>;
     required?: boolean;
@@ -30,5 +25,5 @@ export interface Endpoint {
     query?: TypedSchema;
     body?: TypedSchema;
     params?: UntypedSchema;
-    handler: (ctx: Globals) => RequestHandler;
+    handler: (gl: Globals) => RequestHandler;
 }

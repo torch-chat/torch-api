@@ -4,7 +4,7 @@ import { User } from "../orm";
 import { Long } from "mongodb";
 import { createSession } from "../mongodb";
 
-export default {
+export const post = {
     path: "/auth",
     method: "post",
     body: {

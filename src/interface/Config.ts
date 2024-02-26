@@ -1,4 +1,7 @@
 export interface Config {
     port: number;
-    mongodb_connection_string: string;
+    mongodb: {
+        connection_string: string;
+        database: string;
+    };
 }

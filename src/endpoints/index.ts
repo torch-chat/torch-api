@@ -1,9 +1,9 @@
 import * as auth from "./auth";
-import * as getuser from "./getuser";
+import * as user from "./user";
 import * as logout from "./logout";
 
-export default [
-    auth,
-    getuser,
-    logout
+export const endpoints = [
+    auth.post,
+    user.get,
+    logout.get
 ];

@@ -2,7 +2,7 @@ import { Long } from "mongodb";
 import { Endpoint } from "../interface";
 import { User } from "../orm";
 
-export default {
+export const get = {
     path: "/user/:id",
     method: "get",
     params: {
