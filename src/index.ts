@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 import * as yaml from "js-yaml";
 import * as fs  from "fs";
 import { Config, Globals } from "./interface";
-import * as endpoints from "./endpoints";
+import { endpoints } from "./endpoints";
 
 const app = express();
 const cfg: Config = yaml.load(fs.readFileSync("/etc/torch/torch.yaml", "utf8")) as Config;
