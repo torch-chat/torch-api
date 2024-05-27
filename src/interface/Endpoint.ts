@@ -18,6 +18,7 @@ export type UntypedSchema = {
     [prop: string]: UntypedSchemaEntry;
 }
 
+/*
 export type Method = "all" | "get" | "post" | "put" | "delete" | "patch" | "options" | "head";
 export interface Endpoint {
     path: string;
@@ -27,3 +28,4 @@ export interface Endpoint {
     params?: UntypedSchema;
     handler: (gl: Globals) => RequestHandler;
 }
+*/

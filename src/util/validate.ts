@@ -1,9 +1,10 @@
+import { RequestHandler } from "express";
 import { ValidationException } from "../exceptions";
 import { TypedSchema, UntypedSchema, TypedSchemaEntry } from "../interface";
 import { ofType } from "./ofType";
 
 // eslint-disable-next-line
-export function validate(schema: TypedSchema | UntypedSchema, body: { [index: string]: any }) {
+export function validateSchema(schema: TypedSchema | UntypedSchema, body: { [index: string]: any }) {
     for (const [prop, rule] of Object.entries(schema)) {
         if ((rule.required ?? false) && !Object.prototype.hasOwnProperty.call(body, prop))
             throw new ValidationException(`property undefined: ${prop}`);
@@ -18,3 +19,10 @@ export function validate(schema: TypedSchema | UntypedSchema, body: { [index: st
             validator(body[prop]);
     }
 }
+
+export const validate: (schema: { params?: TypedSchema | UntypedSchema, query?: TypedSchema | UntypedSchema, body?: TypedSchema | UntypedSchema }) => RequestHandler = (schema) => (req, res, next) => {
+    if (schema.params) validateSchema(schema.params, req.params);
+    if (schema.query) validateSchema(schema.query, req.query);
+    if (schema.body) validateSchema(schema.body, req.body);
+    return next();
+};
