@@ -1,8 +1,7 @@
 import { Long } from "mongodb";
 
 export interface User {
-    id: Long;
+    _id: Long;
     username: string;
     password: string;
-    email?: string;
 }

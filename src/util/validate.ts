@@ -16,7 +16,8 @@ export function validateSchema(schema: TypedSchema | UntypedSchema, body: { [ind
             throw new ValidationException(`type mismatch: ${prop} should be ${(rule as TypedSchemaEntry<any>).type}`);
         const validators = rule.validate ?? [];
         for (const validator of validators instanceof Array ? validators : [validators])
-            validator(body[prop]);
+            if (!validator(body[prop]))
+                throw new ValidationException(`validation failed: ${prop}`);
     }
 }
 
@@ -26,3 +27,6 @@ export const validate: (schema: { params?: TypedSchema | UntypedSchema, query?: 
     if (schema.body) validateSchema(schema.body, req.body);
     return next();
 };
+
+export const and = (clauses: boolean[]) => !clauses.includes(false);
+export const or = (clauses: boolean[]) => clauses.includes(true);

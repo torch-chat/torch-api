@@ -22,7 +22,7 @@ export default (app: Express, gl: Globals) => {
         }
     }), async (req, res) => {
         const { username, password } = req.body as { username: string; password: string; };
-        const user = await gl.db.collection<User>("users").findOne<{ _id: Long; password:string }>({ username }, { projection: { _id: 1, password: 1 } });
+        const user = await gl.db.collection<User>("users").findOne<{ _id: Long; password: string }>({ username }, { projection: { _id: 1, password: 1 } });
         const match = await bcrypt.compare(password, user.password);
         if (!match) return res.sendStatus(403);
         const session = await createSession(gl, user._id);

@@ -1,8 +1,6 @@
-import { RequestHandler } from "express";
 import { Class } from "./Class";
-import { Globals } from "./Globals";
 
-export type Validator<T> = (value: T) => void;
+export type Validator<T> = (value: T) => boolean | boolean[];
 export type TypedSchemaEntry<T> = {
     type: string | Class<T>;
     required?: boolean;
@@ -17,15 +15,3 @@ export type TypedSchema = {
 export type UntypedSchema = {
     [prop: string]: UntypedSchemaEntry;
 }
-
-/*
-export type Method = "all" | "get" | "post" | "put" | "delete" | "patch" | "options" | "head";
-export interface Endpoint {
-    path: string;
-    method: Method;
-    query?: TypedSchema;
-    body?: TypedSchema;
-    params?: UntypedSchema;
-    handler: (gl: Globals) => RequestHandler;
-}
-*/

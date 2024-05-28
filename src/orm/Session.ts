@@ -1,7 +1,7 @@
 import { Long } from "mongodb";
 
 export interface Session {
-    id: Long;
+    _id: Long;
     userId: Long;
     key: string;
 }

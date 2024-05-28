@@ -1,5 +1,7 @@
 import { Long } from "mongodb";
 
 export interface Channel {
-    id: Long;
+    _id: Long;
+    name: string;
+    description: string;
 }
